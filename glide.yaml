@@ -1,0 +1,11 @@
+package: github.com/ledboot/Lynx
+import:
+- package: github.com/gin-gonic/gin
+- package: github.com/go-sql-driver/mysql
+  version: ^1.4.0
+- package: github.com/go-xorm/xorm
+  version: ^0.7.0
+- package: github.com/go-xorm/builder
+  version: ^0.3.0
+- package: github.com/go-xorm/core
+  version: ^0.6.0
