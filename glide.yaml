@@ -9,3 +9,7 @@ import:
   version: ^0.3.0
 - package: github.com/go-xorm/core
   version: ^0.6.0
+- package: github.com/stretchr/testify
+  version: ^1.2.2
+  subpackages:
+  - assert

@@ -10,7 +10,7 @@ import (
 var _engine *xorm.Engine
 
 func ConfigDb() {
-	engine, error := xorm.NewEngine("mysql", "root:root@tcp(localhost:32769)/lynx?charset=utf8")
+	engine, error := xorm.NewEngine("mysql", "root:root@tcp(localhost:32768)/lynx?charset=utf8")
 	if error != nil {
 		panic(error)
 	}
@@ -33,4 +33,5 @@ func GetEngine() *xorm.Engine {
 
 func Sync() {
 	_engine.Sync2(new(models.Indexs))
+	_engine.Query("alter table indexs auto_increment =1000")
 }

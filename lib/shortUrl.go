@@ -32,7 +32,7 @@ func GetShortCode(num, n int64) string {
 	var remainder int64
 	for num != 0 {
 		remainder = num % n
-		if remainder < 62 && remainder > 10 {
+		if remainder < 62 && remainder >= 10 {
 			remainder_str = tenToAny[remainder] + remainder_str
 		} else {
 			remainder_str = strconv.FormatInt(int64(remainder), 10) + remainder_str
