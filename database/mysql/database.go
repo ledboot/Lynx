@@ -1,4 +1,4 @@
-package database
+package mysql
 
 import (
 	"github.com/go-xorm/xorm"
@@ -9,7 +9,7 @@ import (
 
 var _engine *xorm.Engine
 
-func ConfigDb() {
+func Config() {
 	engine, error := xorm.NewEngine("mysql", "root:root@tcp(localhost:32768)/lynx?charset=utf8")
 	if error != nil {
 		panic(error)
