@@ -22,6 +22,10 @@ func Config() {
 				conn.Close()
 				return nil, err
 			}
+			if _, err := conn.Do("select", 0); err != nil {
+				conn.Close()
+				return nil, err
+			}
 			return conn, err
 		},
 	}
