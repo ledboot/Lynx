@@ -2,15 +2,12 @@ package main
 
 import (
 	"github.com/ledboot/Lynx/router"
-	"github.com/ledboot/Lynx/database/mysql"
-	"github.com/ledboot/Lynx/database/redis"
+	"github.com/ledboot/Lynx/models"
 )
 
 func main() {
-	mysql.Config()
-	mysql.Sync()
-	redis.Config()
-
+	models.SetupEngine()
+	models.Sync()
 	r := router.SetupRouter()
-	r.Run(":8090")
+	r.Run(":8091")
 }
