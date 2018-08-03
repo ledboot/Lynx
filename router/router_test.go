@@ -5,12 +5,12 @@ import (
 	"net/http/httptest"
 	"net/http"
 	"fmt"
-	"github.com/ledboot/Lynx/database/mysql"
+	"github.com/ledboot/Lynx/models"
 )
 
 func TestShortUrl(t *testing.T) {
-	mysql.Config()
-	mysql.Sync()
+	models.SetupEngine()
+	models.Sync()
 	router := SetupRouter()
 	w := httptest.NewRecorder()
 	params := "https://www.baidu.com"

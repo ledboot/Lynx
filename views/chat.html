@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<script>
+    
+    window.addEventListener('load',function (event) {
+        let contexnt = document.getElementById("context")
+        let close = document.getElementById("close")
+        let send = document.getElementById("send")
+        let msg = document.getElementById("sendContext")
+        let ws
+        let sendMsg =function(message){
+            let d = document.createElement("div")
+            d.innerHTML=message
+            contexnt.appendChild(d)
+        }
+
+        document.getElementById("connect").onclick = function (event) {
+            if(ws){
+                return false
+            }
+            ws = new WebSocket("ws://localhost:8091/ws")
+            ws.onopen =function (event) {
+                sendMsg("open")
+            }
+            ws.onclose = function (event) {
+                ws = null
+                sendMsg("client close")
+            }
+            ws.onmessage = function (event) {
+                sendMsg("receive msg->"+event.data)
+            }
+            ws.onerror = function (event) {
+                sendMsg("on error->"+event.data)
+            }
+        }
+
+
+        close.onclick=function (event) {
+            if(ws){
+                ws.close(3200,"client close")
+                ws =null
+            }
+        }
+
+        send.onclick=function (event) {
+            if(ws){
+                ws.send(msg.value)
+            }
+        }
+    })
+
+</script>
+
+<style type="text/css">
+    .container{
+        margin: auto 10px;
+        width: 100%;
+        clear: both;
+    }
+
+    .left{
+        float: left;
+        width: 30%;
+    }
+
+    .right{
+        float: right;
+        width: 70%;
+    }
+</style>
+
+<body>
+<div class="container">
+    <div class="left">
+        <input id="connect" type="button" value="connect">
+        <input id="close" type="button" value="close">
+        <br>
+
+        <input type="text" id="sendContext" placeholder="输入消息">
+        <input id="send" type="button" value="send"/>
+    </div>
+    <div class="right" id="context">
+    </div>
+</div>
+
+</body>
+</html>
